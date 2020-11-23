@@ -1,0 +1,232 @@
+body {
+    color: white;
+    font-family: 'Big Shoulders Display', cursive;
+    font-weight: 400;
+    font-size: 1.5rem;
+    margin: 0;
+    text-align: center;
+}
+
+h1 {
+    font-family: 'Faster One', cursive;
+        color: black;
+}
+
+h2 {
+    text-transform: uppercase;
+
+}
+
+.close-button {
+    cursor: pointer;
+    position: absolute;
+    top: 130px;
+    right: 100px;
+    
+}
+
+
+
+
+
+.container {
+    background-color: black;
+    padding-top: 10px;
+}
+
+/* AppComponent */
+
+.play {
+    background-color: #39FF14;
+    font-family: 'Faster One', cursive;
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-style: inset;
+    border-color: #556052;
+    cursor: pointer;
+}
+
+
+.alert {
+    font-size: 20px;
+    color:#FF329D;
+}
+
+
+.choose{
+    display: flex;
+
+}
+
+
+
+
+
+
+
+.fish {
+    background-color: black;
+    position:relative;
+    transition:top 3000s linear; 
+}
+
+.fish-map {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* RaceComponent */
+
+.race {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* CounterComponent */
+
+.counter {
+    background-color: rgb(255,0,0);
+    border-radius: 20px;  
+    font-size: 40px;
+    height: 30%;
+    left:23%;
+    padding: 10px;
+    position: absolute;
+    top:40%;
+    width: 50%;
+    z-index: 1;
+    transition: opacity 1s, visibility 0s linear 1s;
+}
+
+.p-go {
+    padding-top: 7%;
+}
+
+.above {
+    position: absolute;
+    background-color: white;
+}
+/* Header */
+
+.header {
+    background-color: white;
+    padding: 10px;
+    text-align: right;
+    text-decoration: none;
+}
+
+.header-link {
+    padding: 5px;
+    text-decoration: none;
+}
+
+.logo {
+    color:black;
+    font-family: 'Faster One', cursive;
+    left: 50px;
+    position: absolute;
+    text-decoration: none;
+    text-align: left;
+}
+
+.box {
+    padding-left: 20px;
+    transform: rotate(25deg);
+}
+
+/* InstructionComponent */
+
+.instruction {
+    background-color: #FF329D;
+    border-radius: 100px;
+    margin: 20px;
+    padding: 10px;
+}
+
+
+/* FishComponent */
+
+.fish-card {
+    background-color: white;
+    border: 10px solid;
+    border-radius: 20px;
+    cursor: pointer;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+@keyframes up-down {
+    from {transform: rotateY(180deg) rotate(-5deg);}
+    to {transform: rotateY(180deg) rotate(5deg);}
+}
+
+.fish-img.race-fish {
+    animation-name: up-down;
+    animation-direction: alternate;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    height: auto;
+    position: relative;
+    width: calc((100vh - 80px) / 4);
+    transition-timing-function: ease-in-out;
+    transition-property: left;
+    left: 0;
+    
+}
+
+@keyframes rotate-on {
+  from {transform: rotateY(180deg);}
+  to {transform: rotateY(540deg);}
+}
+
+.fish-card:hover img, .fish-card.selected img {
+    animation-name: rotate-on;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.fish-img {
+    height: 200px;
+    transform: rotateY(180deg);
+    width: 200px;
+}
+
+.plus-class {
+    align-items: center;
+    display: inline-flex;
+    padding-right: 10px;
+}
+
+.calc {
+    border: none;
+    cursor: pointer;
+    margin-top: 0px;
+    margin: 10px;
+}
+
+.calc-icon {
+    background-color:white;
+    border-radius: 50px;
+    color: black;
+    height: 20px;
+    width: 20px;
+}
+
+/* .distance {
+    animation-name: distance;
+    animation-duration: 4
+}
+
+@keyframes distance {
+    from {left: 0}
+    to {left: 80%;}
+
+} */
