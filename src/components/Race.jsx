@@ -1,64 +1,58 @@
-import React, {useState} from "react";
-import Counter from "./Counter"
-import Fish from "./Fish";
+import React, { useState } from "react";
+import Counter from "./Counter";
+import GameResult from "../GameResult";
+import WinOrLose from "./WinOrLose";
+
 
 function Race(props) {
     const [distance, setDistance] = useState(0);
-    const allVel = []
+    const [gameResult, setGameResult] = useState(null)
 
-    // function handleAmount(amount) {
-    //     if(amount =!0) {
-            
-    //         console.log(fishesName)
-    //     }
-    // }
+    function newFish(fish) {
+        const vel = (Math.floor(Math.random() * 20) + 70) * 100;
+        fish.velocity = vel;
 
-
-    // function winOrLoose() {
-    //     return Math.max(...allVel)
-    // }
-
-//   function winOrLoose() {
-// passar por todos os elementos da array e descobrir qual é o maior elemento
-// retornar o id desse elemento
-
-// se o id desse elemento for igual ao de algum dos itens apostados rertornar "você venceu" -> 
-// my bets / jogar de novo (-> voltar para pagina home)
-// e chamar uma função que calcula o quantas rações voce ganhou ou pderdeu (o balanço)
-// se não, retornar "você perdeu" -> jogar de novo (rertornar para pagina home)
-
-//   }
-
-
-   
-
-
-    function newFish(fish) { 
-        const vel = Math.floor(Math.random() * 2000) + 7000
-        // const maxVel = Math.max(...allVel)
-        console.log(fish.counting)
-        console.log(fish.vel)
-
-        // console.log(Math.max(...allVel))
-        // console.log(allVel[maxVel])
-        // console.log(fish.name)
-        // console.log(fish.key)
-     
-     
-        return <img 
-        className="race-fish fish-img" 
-        style={{ transitionDuration: vel + "ms", left: distance + "%"}} src={fish.img}></img>
+        return <img
+            alt="fish draw"
+            className="race-fish fish-img"
+            style={{ transitionDuration: vel + "ms", left: distance + "%" }} src={fish.img}></img>
     }
 
-    
-    return <div >
-        <Counter onFinish={() => setDistance(79.8)} />
-        <div  className="race">
+    function handleFinish() {
+        setDistance(79.8)
+        setTimeout(winOrLoose, 9000);
+    }
+
+    function winOrLoose() {
+        const minVel = Math.min(...props.fishes.map(fish => fish.velocity));
+        const winners = props.fishes.filter(fish => fish.velocity === minVel);
+
+        console.log(winners)
+        console.log(winners[0].counting)
+
+        if (winners.length !== 1) {
+            console.log("no one wons")
+            // props.gameResult
+            setGameResult(GameResult.TIE)
+        } else if (winners[0].counting > 0) {
+            console.log("you won this game")
+            // props.gameResult
+            setGameResult(GameResult.WIN)
+
+        } else {
+            console.log("you loose")
+            // props.gameResult
+            setGameResult(GameResult.LOSE)
+
+        }
+    }
+
+    return <div>
+        <Counter onFinish={handleFinish} />
+        <div className="race">
             {props.fishes.map(newFish)}
-  
-
+            <WinOrLose gameResult={gameResult} />
         </div>
-
     </div>
 }
 

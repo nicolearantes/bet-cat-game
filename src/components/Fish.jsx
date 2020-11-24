@@ -21,7 +21,7 @@ function Fish(props) {
         if (hasFood) {
             props.fish.counting = counting + 100
             setCounting(counting + 100)
-        }
+        } 
     }
 
     function handleSub() {
@@ -41,7 +41,7 @@ function Fish(props) {
                 style={{ borderColor: borderColor }}>
                 <h1>{props.name}</h1>
                 <img className="fish-img" alt="Draw of a fish, colored with golden color" src={props.img}></img>
-                
+
             </div>
 
             <div className="plus-class" style={{ visibility: plusClass }}>
