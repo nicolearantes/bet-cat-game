@@ -1,16 +1,42 @@
-import React from "react";
+import React, {useState} from "react";
+import Cookies from 'js-cookie';
 
-function MyBets() {
+import fishes from "../fishes";
+
+
+
+function MyBets(props) {
+    const [whichRound, setWhichRound] = useState()
+    console.log(whichRound)
+
+   
+        
+        console.log(totalFood)
+
+  
+    
+    function rounds() {
+        setWhichRound(whichRound + props.round)
+    }
     return <div>
         <h1>My Bets</h1>
-        <ul>
-            {/* vai vir do objeto que foi apostado um valor direfente de 0 */}
-            <li>peixes que foram apostados</li>
-            {/* vai vir da constante do valor que vai calcular quando vai ganhar ou perder */}
-            <li>valor que foi apostado no peixe</li>
-            {/* vai vir da parte da corrida que define quem perdeu e quem ganhou */}
-            <li>venceu ou perdeu</li>
-        </ul>
+        <p>Round {whichRound}</p>
+        {/* <div>
+           
+            <table>
+                <tr>
+                    <th>Fish</th>
+                    <th>Bet</th>
+                    <th>Result</th>
+                </tr> */}
+                {/* create one this for each fish betted */}
+                {/* <tr>
+                    <td>{fishName}</td>
+                    <td>{betValue}</td>
+                    <td>{haswin}</td>
+                </tr>
+            </table>
+        </div> */}
     </div>
 }
 

@@ -1,13 +1,13 @@
 const fishes = [
     {
         key:1,
-        name: "Goldfish",
+        name: "Gold fish",
         img: "/img/goldfish.png",
         counting: 0
     },
     {
         key: 2,
-        name: "Clownfish",
+        name: "Clown fish",
         img:"/img/clownfish.png",
         counting: 0
 
@@ -21,7 +21,7 @@ const fishes = [
     },
     {
         key: 4,
-        name: "Lionfish",
+        name: "Lion fish",
         img:"/img/lionfish.png",
         counting: 0
 

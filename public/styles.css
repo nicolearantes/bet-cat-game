@@ -4,12 +4,15 @@ body {
     font-weight: 400;
     font-size: 1.5rem;
     margin: 0;
+    /* padding: 0 10px; */
     text-align: center;
 }
 
 h1 {
+    color: black;
     font-family: 'Faster One', cursive;
-        color: black;
+    margin: 0;
+    padding: 8px;
 }
 
 h2 {
@@ -30,11 +33,14 @@ h2 {
 
 
 .container {
-    background-color: black;
-    padding-top: 10px;
+    background-color:black;
 }
 
 /* AppComponent */
+.app-text {
+    padding: 0 20px;
+}
+
 
 .play {
     background-color: #39FF14;
@@ -42,6 +48,7 @@ h2 {
     font-size: 20px;
     padding: 10px;
     margin-bottom: 20px;
+    margin-right: 10px;
     border-style: inset;
     border-color: #556052;
     cursor: pointer;
@@ -53,17 +60,9 @@ h2 {
     color:#FF329D;
 }
 
-
 .choose{
     display: flex;
-
 }
-
-
-
-
-
-
 
 .fish {
     background-color: black;
@@ -82,6 +81,10 @@ h2 {
 
 .race {
     background-color: white;
+    background-image: url(img/race.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 75%;
     display: flex;
     flex-direction: column;
 }
@@ -144,8 +147,21 @@ h2 {
 .instruction {
     background-color: #FF329D;
     border-radius: 100px;
-    margin: 20px;
+    /* margin: 20px; */
     padding: 10px;
+}
+
+.cat-instruction img {
+    height: 50%;
+    width: 50%;
+}
+
+.cat-tail {
+    position:relative ;
+}
+
+.cat-paw {
+    position: relative;
 }
 
 
@@ -153,12 +169,13 @@ h2 {
 
 .fish-card {
     background-color: white;
-    border: 10px solid;
     border-radius: 20px;
     cursor: pointer;
-    margin: 10px;
-    padding: 10px;
+    margin: 0 10px;
+    max-width: 300px;
+    padding: 5px;
     text-align: center;
+    width: 70vw;
 }
 
 @keyframes up-down {
@@ -173,8 +190,10 @@ h2 {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     height: auto;
+    max-width: 150px;
     position: relative;
-    width: calc((100vh - 80px) / 4);
+    /* width: calc((100vh - 80px) / 4); */
+    width: 19%;
     transition-timing-function: ease-in-out;
     transition-property: left;
     left: 0;
@@ -230,3 +249,23 @@ h2 {
     to {left: 80%;}
 
 } */
+
+.win-or-lose {
+    background-color: #FF329D;
+    left:23%;
+    padding: 20px;
+    position: absolute;
+    top:40%;
+}
+
+.fish-card h1 {
+    height: 2em;
+}
+
+.app-text h2 {
+    margin-bottom: 0;
+}
+
+.app-text p {
+    margin-top: 0;
+}

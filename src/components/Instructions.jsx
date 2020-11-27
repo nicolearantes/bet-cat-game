@@ -1,11 +1,15 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Instructions() {
     return <div className="instruction">
 
         <Link to="/"><i className="close-button fas fa-times fa-lg"></i></Link>
-        <i className="fas fa-cat fa-10x"></i>
+        {/* <div className="cat-instruction"> */}
+        <img url="https://media.giphy.com/media/eNAmdIazSUgTQeDdeI/giphy.gif"></img>
+            {/* <img url="https://media.giphy.com/media/eNAmdIazSUgTQeDdeI/giphy.gif"> */}
+
+        {/* </div> */}
 
         <h2>That's how the game works:</h2>
 

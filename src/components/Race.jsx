@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import Counter from "./Counter";
+import WinOrLoose from './WinOrLose';
 import GameResult from "../GameResult";
-import WinOrLose from "./WinOrLose";
-
 
 function Race(props) {
     const [distance, setDistance] = useState(0);
-    const [gameResult, setGameResult] = useState(null)
+    const [gameResult, setGameResult] = useState(null);
 
     function newFish(fish) {
         const vel = (Math.floor(Math.random() * 20) + 70) * 100;
@@ -26,32 +25,38 @@ function Race(props) {
     function winOrLoose() {
         const minVel = Math.min(...props.fishes.map(fish => fish.velocity));
         const winners = props.fishes.filter(fish => fish.velocity === minVel);
+        let allCountings = props.fishes.map(fish => fish.counting);
 
-        console.log(winners)
-        console.log(winners[0].counting)
+        let prize
+        const totalBets = allCountings.reduce((total, each) => total + each)
 
         if (winners.length !== 1) {
-            console.log("no one wons")
-            // props.gameResult
-            setGameResult(GameResult.TIE)
-        } else if (winners[0].counting > 0) {
-            console.log("you won this game")
-            // props.gameResult
+            prize = totalBets
+        } else {
+            prize = winners[0].counting * 3
+        }
+
+        if (prize > totalBets) {
             setGameResult(GameResult.WIN)
 
-        } else {
-            console.log("you loose")
-            // props.gameResult
+        } else if (prize < totalBets) {
             setGameResult(GameResult.LOSE)
 
+        } else {
+            setGameResult(GameResult.TIE)
         }
+        props.onRaceEnd(prize, totalBets)
     }
 
     return <div>
         <Counter onFinish={handleFinish} />
         <div className="race">
             {props.fishes.map(newFish)}
-            <WinOrLose gameResult={gameResult} />
+            <WinOrLoose
+                gameResult={gameResult}
+                fishes={props.fishes}
+                setGameState={props.setGameState}
+            />
         </div>
     </div>
 }
