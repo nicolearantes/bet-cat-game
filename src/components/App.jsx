@@ -16,11 +16,12 @@ import Cookies from 'js-cookie';
 function App() {
 
     const totalFoodCookie = Cookies.get("totalFood")
+    const betsCookie = Cookies.get("bets")
 
     const [totalFood, setTotalFood] = useState(totalFoodCookie ? JSON.parse(totalFoodCookie) : 1000);
     const [gameState, setGameState] = useState("choose");
     const [savedFishes, setSavedFishes] = useState(fishes.map(fish => ({...fish})));
-    const [bets, setBets] = useState([])
+    const [bets, setBets] = useState(betsCookie ? JSON.parse(betsCookie) :[])
 
     function handleAdd(amount) {
         if (totalFood > 0) {
@@ -50,7 +51,6 @@ function App() {
         setGameState("race")
     }
 
-
     function handleRestart() {
         const restartWindow = window.confirm("Are you sure?")
 
@@ -61,19 +61,18 @@ function App() {
         }
     }
 
-
-
     function handleRaceEnd(prize, totalBets) {
         const newTotal = prize + totalFood
         
         Cookies.set("totalFood", newTotal)
-        // Cookies.set("bets", [])
         
         bets.push({
             prize: prize,
             totalBets: totalBets,
             fishes: savedFishes
         })
+
+        Cookies.set("bets", JSON.stringify(bets))
 
         setBets(bets)
         setSavedFishes(fishes.map(fish => ({ ...fish })))
