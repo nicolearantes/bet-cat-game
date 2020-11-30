@@ -1,33 +1,42 @@
-import React, {useState} from "react";
-import GameResult from "../GameResult";
+import React from "react";
 import { Link } from "react-router-dom";
-
+import GameResult from "../GameResult"
 
 
 function WinOrLose(props) {
-    let text
-    let button = "Play again"
+    const winner = props.gameResult.winner
+    const foodBalance = props.gameResult.foodBalance
 
-    if(!props.gameResult) {
-        return null
-    } else if(props.gameResult === GameResult.WIN) {
-        text = "Congratulations, you win!"
-
-    } else if (props.gameResult === GameResult.TIE) {
-        text = "It's was a tie..."
-
-
-    } else if (props.gameResult === GameResult.LOSE) {
-       text = "Oh no, you lost!"
-
+    function whoWon() {
+        if (winner) {
+            return <div>
+                <p>{winner.img}</p>
+                <p>{winner.name}</p>
+            </div>
+        } else {
+            return <div>
+                <p> No winners </p>
+            </div>
+        }
     }
 
-    alert(text)
+    let text
+    if (foodBalance > 0) {
+        text = `You won ${foodBalance} food!`
+
+    } else if (foodBalance < 0) {
+        text = `You lost ${-foodBalance} food!`
+
+    } else if (props.gameResult === GameResult.TIE) {
+        text = "You didn't lose or win any food"
+    }
+
+
 
     return <div className="win-or-lose">
-        <h2>{text}</h2>
-        <p> You currently have  cat's food.</p>
-        <button onClick={() => props.setGameState("choose")}>{button}</button>
+        {whoWon()}
+        <p> {text} </p>
+        <button onClick={() => props.setGameState("choose")}>Play again</button>
         <Link to="my-bets"><button>My Bets</button></Link>
     </div>
 }

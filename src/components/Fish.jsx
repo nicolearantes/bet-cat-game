@@ -16,7 +16,7 @@ function Fish(props) {
     }
 
     function handleAdd() {
-        var hasFood = props.onAdd(100)
+        const hasFood = props.onAdd(100)
 
         if (hasFood) {
             props.fish.counting = counting + 100

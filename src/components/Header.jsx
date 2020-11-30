@@ -9,9 +9,9 @@ import {
 } from "react-router-dom";
 
 
-function Header() {
+function Header(props) {
     return <div className="header">
-            <Link className="logo" to="/">BetCat</Link>
+            <Link className="logo" to="/" onClick={() => props.setGameState("choose")}>BetCat</Link>
             <Link className="header-link" to="/my-bets"> /MyBets</Link>
             <Link className="header-link" to="/instructions"> <i class="far fa-question-circle"></i></Link>
 

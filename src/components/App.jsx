@@ -14,9 +14,13 @@ import MyBets from "./MyBets"
 import Cookies from 'js-cookie';
 
 function App() {
-    const [totalFood, setTotalFood] = useState(Cookies.get("totalFood") || 1000);
+
+    const totalFoodCookie = Cookies.get("totalFood")
+
+    const [totalFood, setTotalFood] = useState(totalFoodCookie ? JSON.parse(totalFoodCookie) : 1000);
     const [gameState, setGameState] = useState("choose");
-    const [savedFishes, setSavedFishes] = useState(fishes);
+    const [savedFishes, setSavedFishes] = useState(fishes.map(fish => ({...fish})));
+    const [bets, setBets] = useState([])
 
     function handleAdd(amount) {
         if (totalFood > 0) {
@@ -46,6 +50,7 @@ function App() {
         setGameState("race")
     }
 
+
     function handleRestart() {
         const restartWindow = window.confirm("Are you sure?")
 
@@ -56,11 +61,22 @@ function App() {
         }
     }
 
-    function handleRaceEnd(countingResult) {
-        const newTotal = countingResult + totalFood
-        console.log(JSON.parse(Cookies.get('bets')))
+
+
+    function handleRaceEnd(prize, totalBets) {
+        const newTotal = prize + totalFood
+        
         Cookies.set("totalFood", newTotal)
-        Cookies.set("bets", ['tesrt', 'oi'])
+        // Cookies.set("bets", [])
+        
+        bets.push({
+            prize: prize,
+            totalBets: totalBets,
+            fishes: savedFishes
+        })
+
+        setBets(bets)
+        setSavedFishes(fishes.map(fish => ({ ...fish })))
         setTotalFood(newTotal)
     }
 
@@ -77,10 +93,10 @@ function App() {
                         {savedFishes.map(newFish)}
                     </div>
 
-                    
-                        <button className="play" onClick={handleRace}>Let's play! </button>
-                        <button className="play" style={{ backgroundColor: "purple" }} onClick={handleRestart}>Restart</button>
-                   
+
+                    <button className="play" onClick={handleRace}>Let's play! </button>
+                    <button className="play" style={{ backgroundColor: "purple" }} onClick={handleRestart}>Restart</button>
+
 
                 </div>
             )
@@ -93,17 +109,18 @@ function App() {
                 onRaceEnd={handleRaceEnd} />)
         }
     }
+ 
 
     return (
         <Router>
             <div className="container">
-                <Header />
+                <Header setGameState={setGameState} />
                 <Switch>
                     <Route path="/instructions">
                         <Instructions />
                     </Route>
                     <Route path="/my-bets">
-                        <MyBets />
+                        <MyBets bets={bets}/>
                     </Route>
                     <Route path="/">
                         {home()}

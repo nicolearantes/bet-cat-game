@@ -6,6 +6,7 @@ import GameResult from "../GameResult";
 function Race(props) {
     const [distance, setDistance] = useState(0);
     const [gameResult, setGameResult] = useState(null);
+    const gameFinished = gameResult != null
 
     function newFish(fish) {
         const vel = (Math.floor(Math.random() * 20) + 70) * 100;
@@ -25,38 +26,42 @@ function Race(props) {
     function winOrLoose() {
         const minVel = Math.min(...props.fishes.map(fish => fish.velocity));
         const winners = props.fishes.filter(fish => fish.velocity === minVel);
-        let allCountings = props.fishes.map(fish => fish.counting);
+        const allCountings = props.fishes.map(fish => fish.counting);
+        const totalBets = allCountings.reduce((total, each) => total + each)
 
         let prize
-        const totalBets = allCountings.reduce((total, each) => total + each)
+        let winner
 
         if (winners.length !== 1) {
             prize = totalBets
+            winner = null
         } else {
-            prize = winners[0].counting * 3
+            winner = winners[0]
+            winner.won = true
+            prize = winner.counting * 3
         }
 
-        if (prize > totalBets) {
-            setGameResult(GameResult.WIN)
+        setGameResult({
+            foodBalance: prize - totalBets,
+            winner: winner
+        })
 
-        } else if (prize < totalBets) {
-            setGameResult(GameResult.LOSE)
-
-        } else {
-            setGameResult(GameResult.TIE)
-        }
         props.onRaceEnd(prize, totalBets)
+    }
+
+    function winOrLose() {
+        return  <WinOrLoose
+            gameResult={gameResult}
+            fishes={props.fishes}
+            setGameState={props.setGameState}
+        />
     }
 
     return <div>
         <Counter onFinish={handleFinish} />
         <div className="race">
             {props.fishes.map(newFish)}
-            <WinOrLoose
-                gameResult={gameResult}
-                fishes={props.fishes}
-                setGameState={props.setGameState}
-            />
+            {gameFinished ? winOrLose() : "" }
         </div>
     </div>
 }
