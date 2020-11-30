@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Counter from "./Counter";
 import WinOrLoose from './WinOrLose';
 import GameResult from "../GameResult";
@@ -7,15 +7,18 @@ function Race(props) {
     const [distance, setDistance] = useState(0);
     const [gameResult, setGameResult] = useState(null);
     const gameFinished = gameResult != null
+    useEffect(()=> {
+        props.fishes.forEach(fish => {
+            const vel = (Math.floor(Math.random() * 20) + 70) * 100;
+            fish.velocity = vel;
+        })
+    }, [])
 
     function newFish(fish) {
-        const vel = (Math.floor(Math.random() * 20) + 70) * 100;
-        fish.velocity = vel;
-
         return <img
             alt="fish draw"
             className="race-fish fish-img"
-            style={{ transitionDuration: vel + "ms", left: distance + "%" }} src={fish.img}></img>
+            style={{ transitionDuration: fish.velocity + "ms", left: distance + "%" }} src={fish.img}></img>
     }
 
     function handleFinish() {
@@ -45,7 +48,6 @@ function Race(props) {
             foodBalance: prize - totalBets,
             winner: winner
         })
-
         props.onRaceEnd(prize, totalBets)
     }
 

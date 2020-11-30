@@ -1,6 +1,10 @@
 import React from "react";
 
 function MyBets(props) {
+    const rounds=props.bets.map((bet, i) => ({
+        fishes:[...bet.fishes],
+        roundNumber: i + 1
+    })).reverse()
 
 
     function showFish(fish) {
@@ -10,11 +14,11 @@ function MyBets(props) {
         </div>
     }
 
-    function showBet(bet, i) {
-        const podium = bet.fishes.sort((a, b) => a.velocity - b.velocity)
+    function showBet(round) {
+        const podium = round.fishes.sort((a, b) => a.velocity - b.velocity)
 
         return <div>
-            <h2>Round {i + 1} </h2>
+            <h2>Round {round.roundNumber} </h2>
             {podium.map(showFish)}
         </div>
     }
@@ -24,7 +28,7 @@ function MyBets(props) {
 
         <h1 style={{ backgroundColor: "pink" }}> My Bets </h1>
 
-        {props.bets.map(showBet)}
+        {rounds.map(showBet)}
 
     </div>
 }
