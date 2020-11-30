@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function Counter(props) {
     const [count, setCount] = useState(5)
     const [counterVisibility, setCounterVisibility] = useState(true)
-    setTimeout(counting, 1000)
+    
+    useEffect(() => {
+        setTimeout(counting, 1000)
+    }, [count])
 
     function counting() {
         if (count > 0) {
