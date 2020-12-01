@@ -35,6 +35,7 @@ function Counter(props) {
                 backgroundColor: "green"
             }}>
             <p className="p-go"> Go!</p>
+            <i class="fas fa-flag-checkered"></i>
         </div>
     }
 }

@@ -94,7 +94,7 @@ function App() {
 
 
                     <button className="play" onClick={handleRace}>Let's play! </button>
-                    <button className="play" style={{ backgroundColor: "purple" }} onClick={handleRestart}>Restart</button>
+                    <button className="play restart" onClick={handleRestart}>Restart</button>
 
 
                 </div>
