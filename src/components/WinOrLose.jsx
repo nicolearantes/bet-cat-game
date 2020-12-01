@@ -7,37 +7,44 @@ function WinOrLose(props) {
     const winner = props.gameResult.winner
     const foodBalance = props.gameResult.foodBalance
 
+    console.log(props.gameResult)
+
     function whoWon() {
         if (winner) {
             return <div>
-                <p>{winner.img}</p>
-                <p>{winner.name}</p>
+                <h1>The winner</h1>
+                <img 
+                alt="draw fish" 
+                src={winner.img}
+                className=" fish-img"></img>
+                <h1>{winner.name}</h1>
             </div>
         } else {
             return <div>
-                <p> No winners </p>
+                <h1> No winners </h1>
             </div>
         }
     }
 
     let text
+
     if (foodBalance > 0) {
         text = `You won ${foodBalance} food!`
 
     } else if (foodBalance < 0) {
         text = `You lost ${-foodBalance} food!`
 
-    } else if (props.gameResult === GameResult.TIE) {
+    } else {
         text = "You didn't lose or win any food"
     }
 
-
+    console.log(text)
 
     return <div className="win-or-lose">
         {whoWon()}
         <p> {text} </p>
-        <button onClick={() => props.setGameState("choose")}>Play again</button>
-        <Link to="my-bets"><button>My Bets</button></Link>
+        <button className="play" onClick={() => props.setGameState("choose")}>Play again</button>
+        <Link to="my-bets"><button className="play" >My Bets</button></Link>
     </div>
 }
 
