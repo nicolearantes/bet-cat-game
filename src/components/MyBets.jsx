@@ -7,8 +7,6 @@ function MyBets(props) {
         balance: bet.prize - bet.totalBets
     })).reverse()
 
-    console.log(props.bet)
-
     function showFish(fish) {
        
         return <div>

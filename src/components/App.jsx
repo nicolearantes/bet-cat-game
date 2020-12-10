@@ -19,9 +19,9 @@ function App() {
     const betsCookie = Cookies.get("bets")
 
     const [totalFood, setTotalFood] = useState(totalFoodCookie ? JSON.parse(totalFoodCookie) : 1000);
-    const [gameState, setGameState] = useState("choose");
-    const [savedFishes, setSavedFishes] = useState(fishes.map(fish => ({...fish})));
-    const [bets, setBets] = useState(betsCookie ? JSON.parse(betsCookie) :[])
+    const [gameState, setGameState] = useState("begin");
+    const [savedFishes, setSavedFishes] = useState(fishes.map(fish => ({ ...fish })));
+    const [bets, setBets] = useState(betsCookie ? JSON.parse(betsCookie) : [])
 
     function handleAdd(amount) {
         if (totalFood > 0) {
@@ -63,9 +63,9 @@ function App() {
 
     function handleRaceEnd(prize, totalBets) {
         const newTotal = prize + totalFood
-        
+
         Cookies.set("totalFood", newTotal)
-        
+
         bets.push({
             prize: prize,
             totalBets: totalBets,
@@ -79,36 +79,49 @@ function App() {
         setTotalFood(newTotal)
     }
 
-    function home() {
-        if (gameState === "choose") {
-            return (
-                <div>
-                    <div className="app-text">
-                        <h2>Click on the fish to choose it </h2>
-                        <p className="alert"> ! Don't forget to put how much you want to bet on it, otherwise will not count as one of your bets !</p>
-                    </div>
-                    <Food foodAmount={totalFood} />
-                    <div className="fish-map">
-                        {savedFishes.map(newFish)}
-                    </div>
-
-
-                    <button className="play" onClick={handleRace}>Let's play! </button>
-                    <button className="play restart" onClick={handleRestart}>Restart</button>
-
-
-                </div>
-            )
-        }
-
-        if (gameState === "race") {
-            return (<Race
-                fishes={savedFishes}
-                setGameState={setGameState}
-                onRaceEnd={handleRaceEnd} />)
-        }
+    function closeWindow() {
+        setGameState("choose")
     }
- 
+
+
+
+    function home() {
+        if (gameState === "begin" & totalFood === 1000) {
+            return <Instructions handleClick={closeWindow}/>
+
+        } else if (gameState === "choose") {
+            return <div className="app">
+                <div className="app-text">
+                    <h2>Click on the fish to choose it and put how much you want to bet on!</h2>
+                </div>
+                <Food foodAmount={totalFood} />
+                <div className="fish-map">
+                    {savedFishes.map(newFish)}
+                </div>
+
+
+                <button className="play" onClick={handleRace}>Let's play! </button>
+                <button className="play restart" onClick={handleRestart}>Restart</button>
+            </div>
+        } else if (gameState === "myBets") {
+            return <MyBets bets={bets} />
+
+        }
+
+    }
+
+    if (gameState === "race") {
+        return (<Race
+            fishes={savedFishes}
+            setGameState={setGameState}
+            onRaceEnd={handleRaceEnd} />)
+    }
+
+    // if(gameState === "myBets"){
+    //     return <MyBets bets={bets} />
+    // }
+
+
 
     return (
         <Router>
@@ -119,7 +132,7 @@ function App() {
                         <Instructions />
                     </Route>
                     <Route path="/my-bets">
-                        <MyBets bets={bets}/>
+                        <MyBets bets={bets} />
                     </Route>
                     <Route path="/">
                         {home()}

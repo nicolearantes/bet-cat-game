@@ -53,6 +53,9 @@ h2 {
 }
 
 /* App Component */
+.app {
+    padding-bottom: 20px;
+}
 .app-text {
     padding: 0 20px;
 }
@@ -137,12 +140,16 @@ h2 {
 
 .instruction {
     background-color: #FF329D;
-    padding: 10px;
+    padding: 10px 10px 50px 10px;
 }
 
-.cat-instruction img {
-    height: 50%;
-    width: 50%;
+.instructions-title {
+    margin-top: 0;
+}
+
+.cat-instruction-img {
+    height: auto;
+    width: 30%;
 }
 
 .cat-tail {
@@ -151,6 +158,28 @@ h2 {
 
 .cat-paw {
     position: relative;
+}
+
+@media only screen and (max-width: 708px) {
+     .cat-instruction-img {
+    height: auto;
+    width: 50%;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+     .cat-instruction-img {
+    height: auto;
+    width: 60%;
+    }
+}
+
+
+@media only screen and (max-width: 414px) {
+    .cat-instruction-img {
+    height: auto;
+    width: 80%;
+    }
 }
 
 

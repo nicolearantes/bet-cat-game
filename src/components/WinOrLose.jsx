@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import GameResult from "../GameResult"
-
 
 function WinOrLose(props) {
     const winner = props.gameResult.winner
@@ -44,7 +42,7 @@ function WinOrLose(props) {
         {whoWon()}
         <p> {text} </p>
         <button className="play" onClick={() => props.setGameState("choose")}>Play again</button>
-        <Link to="my-bets"><button className="play" >My Bets</button></Link>
+        <button to="my-bets" className="play" onClick={() => props.setGameState("myBets")}>My Bets</button>
     </div>
 }
 
